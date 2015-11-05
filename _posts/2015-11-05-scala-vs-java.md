@@ -2,7 +2,7 @@
 layout: post
 title: "scala vs java"
 description: ""
-category: 
-tags: []
+category: "scala"
+tags: ["scala", "java"]
 ---
 {% include JB/setup %}
