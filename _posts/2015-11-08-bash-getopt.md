@@ -9,6 +9,8 @@ tags: ["bash", "getopt"]
 
 {% highlight bash %}
 
+今天看了下bash的getopt, 写了个例子, 记下来。
+
 #!/bin/bash
 
 #
