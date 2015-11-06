@@ -10,31 +10,81 @@ tags: ["vim"]
 
 ### 可视模式修改命令
 {% highlight text %}
-    v     =>  面向字符的可视模式 
-    V     =>  面向行的可视模式  
-    C-v   =>  面向列块的可视模式  
-    gv    =>  重写上次高亮选取  
-    o     =>  切换高亮选取的活动端 
+v     -  面向字符的可视模式 
+V     -  面向行的可视模式  
+C-v   -  面向列块的可视模式  
+gv    -  重写上次高亮选取  
+o     -  切换高亮选取的活动端 
     
 {% endhighlight %}
 
 ### gU{motion} / gu{motion}
 
 {% highlight text %}
-    有`<a href='#'>one</a>`这么一个字符串, 我们想吧one变成ONE, 或者想把ONE变成one  
-    gUit  one -> ONE  
-    guit  ONE -> one  
-    我们在执行guit时, vim处在命令模式下, 光标可处在a标签的任意位置  
+有<a href='#'>one</a>这么一个字符串, 我们想吧one变成ONE, 或者想把ONE变成one  
+gUit  one -> ONE  
+guit  ONE -> one  
+我们在执行guit时, vim处在命令模式下, 光标可处在a标签的任意位置  
     
 {% endhighlight %}
 
 ### inside the tag
 
 {% highlight text %}
-    这里it的意思是inside the tag: 也就是在xml tag内部的文本对象  
-    再比如  vit 是选择"one"  
-    vi"  是选择双引号之内的东西"toselect"  
-    vi{  是选择大括号之内的东西{toselect}  
-    
+这里it的意思是inside the tag: 也就是在xml tag内部的文本对象  
+再比如  
+vit  - 是选择one  
+vat  - 选择了<a></a>整个标签的所有内容
+vi"  - 是选择双引号之内的东西"toselect"  
+va"  - 选择"toselect" 包括了"
+vi{  - 是选择大括号之内的东西{toselect}     
+
+类似有:
+va[ 
+vi[
+va>
+vi>
+
+此外:
+%  -  {} () []的的光标跳转
+
+viw  - 当前单词
+viW  - 当前字符串
+
+vaw  - 当前单词 + 空格
+vaW  - 当前字符串 + 空格
+
+vis  - 当前句子
+vas  - 当前句子 + 空格
+
+vip  - 当前段落
+vap  - 当前段落 + 空格
+
+{% endhighlight %}
+
+### 移动光标
+{% highlight text %}
+jkhl  - 上下左后  
+
+基于单词的移动:  
+w   -  移动到下一个单词的开头
+b   -  移动到上一个单词开头
+e   -  移动到下单词的末尾
+ge  -  移动到上一个单词的末尾
+
+行内光标移动
+f{char}  -  正向查找
+F{char}  -  反向查找
+t{char}  -  正向
+T{char}  -  反向
+;        -  重复上一次
+,        -  反向重复
+
+光标跳转
+mm  -  标记跳转点m
+`m  -  跳转到m
+mk  -  标记跳转点k
+`k  -  跳转到k
+
 {% endhighlight %}
 
