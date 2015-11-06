@@ -12,9 +12,9 @@ tags: ["bash",  "cron",  "date"]
 40 * * * * /home/hary/bin/backup.pl `/bin/date +%Y%m%d`
 本意是想backup程序执行时, 每次都带上当前的日期作为参数
 但这是错误的。 
-{% endhight %}
+{% endhighlight %}
 
 正确的做法是
 {% highlight bash %}
 40 * * * * /home/hary/bin/backup.pl `/bin/date +\%Y\%m\%d`
-{% endhight %}
+{% endhighlight %}
