@@ -136,5 +136,34 @@ while( my $href = $sth->fetchrow_hashref ) {
 
 {% endhighlight %}
 
+六. 打包成docker
+
+{% highlight bash %}
+FROM hary/ubuntu:14.04
+MAINTAINER hary <94093146@qq.com>
+
+# 修改apt源为aliyun
+ADD assets/sources.list /etc/apt/sources.list
+RUN apt-get update
+
+# 安装freetds and unixodbc
+RUN apt-get install freetds-bin freetds-common freetds-dev libct4 libsybdb5 unixodbc unixodbc-dev unixodbc-bin libodbc1 odbcinst1debian2 tdsodbc php5-odbc
+
+# 安装perl相关内容
+RUN cpan install DBI DBD::ODBC
+
+# 准备配置文件
+ADD assets/freetds.conf /etc/freetds/freetds.conf
+ADD assets/odbcinst.ini /etc/odbcinst.ini
+ADD assets/odbc.ini     /etc/odbc.ini
+ADD setup.sh /setup.sh
+
+# 配置
+RUN /setup.sh
+
+# 运行指令!
+CMD /run.sh
+{% endhighlight %}
+
 
 {% include JB/setup %}
