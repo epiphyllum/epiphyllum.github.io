@@ -8,7 +8,7 @@ tags: [ "unixodbc", "freetds" ]
 
 ## ubuntu 14.04
 
-1. 安装unixodbc, freetds
+一. 安装unixodbc, freetds
 
 {% highlight bash %}
 sudo apt-get install freetds-bin freetds-common freetds-dev libct4 libsybdb5 \  
@@ -18,14 +18,14 @@ sudo apt-get install freetds-bin freetds-common freetds-dev libct4 libsybdb5 \
 
 ## mac
 
-1. 安装
+一. 安装
 
 {% highlight bash %}
 brew install unixodbc  
 brew install freetds --with-unixodbc
 {% endhighlight %}
 
-2. 准备配置文件(freetds.conf)
+二. 准备配置文件(freetds.conf)
 
 {% highlight properties %}
 [cactus]  
@@ -34,7 +34,7 @@ port = 1433
 tds version = 8.0  
 {% endhighlight %}
 
-3. 准备配置文件(odbcinst.ini)
+三. 准备配置文件(odbcinst.ini)
 
 {% highlight properties %}
 [FreeTDS]
@@ -49,7 +49,7 @@ UsageCount=1
 
 {% endhighlight %}
 
-4. 准备配置文件(odbc.ini)
+四. 准备配置文件(odbc.ini)
 
 {% highlight properties %}
 [cactus]  
@@ -59,6 +59,43 @@ Server = cactus
 Port  = 1433  
 tds_version = 8.0  
 {% endhighlight %}
+
+五. Perl测试程序
+
+{% highlight perl %}
+#!/usr/bin/perl
+use warnings;
+use strict;
+use DBI;
+use Data::Dump;
+
+my $dbh = DBI->connect(
+    'dbi:ODBC:cactus',
+    'hary',
+    'jessie',
+    {
+
+      RaiseError => 1,
+      AutoCommit => 0
+    }
+) || die "Database connection not made: $DBI::errstr";
+
+warn "连接数据库成功";
+
+$dbh->do("use batchtest");
+
+warn "设置schema成功";
+
+my $sth = $dbh->prepare(qq/select top 10 * from ApplicationOverDueObjects1103/);
+
+$sth->execute();
+
+while( my $href = $sth->fetchrow_hashref ) {
+    Data::Dump->dump($href);
+}
+
+{% endhighlight %}
+
 
 
 {% include JB/setup %}
