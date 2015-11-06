@@ -7,7 +7,6 @@ tags: ["vim"]
 ---
 {% include JB/setup %}
 
-
 ### 可视模式修改命令
 {% highlight text %}
 v     -  面向字符的可视模式 
@@ -85,6 +84,33 @@ mm  -  标记跳转点m
 `m  -  跳转到m
 mk  -  标记跳转点k
 `k  -  跳转到k
+
+{% endhighlight %}
+
+### 编辑模式下的命令
+{% highlight text %}
+
+C-h     - 退格
+C-w     - 删除当前单词
+C-u     - 删除到行首
+C-r0    - 粘贴寄存器内容
+C-r=    - 作运算
+
+{% endhighlight %}
+
+### 几个命令
+{% highlight text %}
+c  - change : cw ciw  c$ c0
+C  - 删除到行尾同时进入insert
+r  - 改变单个字符，前后都在命令模式
+R  - replace
+>    -
+>ip  - 整段
+<    -
+>>   -
+<<   -
+3>>  -
+3<<  -
 
 {% endhighlight %}
 
