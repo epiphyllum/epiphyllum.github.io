@@ -1,0 +1,12 @@
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">今天配置crontab遇到一个很奇怪的问题， 配置如下:
+40 * * * * /home/hary/bin/backup.pl `/bin/date +%Y%m%d`
+本意是想backup程序执行时, 每次都带上当前的日期作为参数
+但这是错误的。 </code></pre></figure>
+
+<p>正确的做法是</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">40 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /home/hary/bin/backup.pl <span class="sb">`</span>/bin/date +<span class="se">\%</span>Y<span class="se">\%</span>m<span class="se">\%</span>d<span class="sb">`</span></code></pre></figure>
+
+<p>Liquid error: Included file ‘_includes/JB/setup’ not found</p>
+

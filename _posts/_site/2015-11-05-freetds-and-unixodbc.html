@@ -1,0 +1,111 @@
+<p>公司使用的SqlServer数据库，如果想在linux下写个perl/php程序来访问SQLServer, 比较麻烦, SQLServer好像没有Linux/Mac下的驱动
+还好， 有个freetds unixodbc的好东东。</p>
+
+<h2 id="ubuntu-1404">ubuntu 14.04</h2>
+
+<p>一. 安装unixodbc, freetds</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install freetds-bin freetds-common freetds-dev libct4 libsybdb5 <span class="se">\ </span> 
+    unixodbc unixodbc-dev unixodbc-bin libodbc1 odbcinst1debian2</code></pre></figure>
+
+<p>二. 准备配置文件(/etc/freetds/freetds.conf)</p>
+
+<figure class="highlight"><pre><code class="language-properties" data-lang="properties"><span class="err">[cactus]</span>
+<span class="py">host</span> <span class="p">=</span> <span class="s">cactus</span>
+<span class="py">port</span> <span class="p">=</span> <span class="s">1433</span>
+<span class="err">tds</span> <span class="py">version</span> <span class="p">=</span> <span class="s">8.0</span></code></pre></figure>
+
+<p>三. 准备配置文件(/etc/odbcinst.ini)</p>
+
+<figure class="highlight"><pre><code class="language-properties" data-lang="properties"><span class="err">[FreeTDS]</span>
+<span class="py">Description</span> <span class="p">=</span> <span class="s">FreeTDS Driver v0.91</span>
+<span class="py">Driver</span> <span class="p">=</span> <span class="s">/usr/lib/x86_64-linux-gnu/odbc/libtdsodbc.so</span>
+<span class="py">Setup</span> <span class="p">=</span> <span class="s">/usr/lib/x86_64-linux-gnu/odbc/libtdsS.so</span>
+<span class="py">fileusage</span><span class="p">=</span><span class="s">1</span>
+<span class="py">dontdlclose</span><span class="p">=</span><span class="s">1</span>
+<span class="py">UsageCount</span><span class="p">=</span><span class="s">1</span>
+<span class="py">Trace</span> <span class="p">=</span> <span class="s">yes</span>
+<span class="py">TraceFile</span> <span class="p">=</span> <span class="s">/tmp/odbc.log</span></code></pre></figure>
+
+<p>四. 准备配置文件(/etc/odbc.ini)</p>
+
+<figure class="highlight"><pre><code class="language-properties" data-lang="properties"><span class="err">[cactus]</span>
+<span class="py">Description</span> <span class="p">=</span> <span class="s">sqlserver@cactus</span>
+<span class="py">Driver</span> <span class="p">=</span> <span class="s">FreeTDS</span>
+<span class="py">Server</span> <span class="p">=</span> <span class="s">cactus</span>
+<span class="py">Port</span> <span class="p">=</span> <span class="s">1433</span>
+
+<span class="c"># 这个是个坑爹的配置啊！！！！ 一定加上
+</span><span class="py">tds_version</span> <span class="p">=</span> <span class="s">8.0</span></code></pre></figure>
+
+<p>五. Perl测试程序(见mac部分)</p>
+
+<h2 id="mac">mac</h2>
+
+<p>一. 安装</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">brew install unixodbc  
+brew install freetds --with-unixodbc</code></pre></figure>
+
+<p>二. 准备配置文件(/usr/local/etc/freetds.conf)</p>
+
+<figure class="highlight"><pre><code class="language-properties" data-lang="properties"><span class="err">[cactus]</span>  
+<span class="py">host</span> <span class="p">=</span> <span class="s">cactus  </span>
+<span class="py">port</span> <span class="p">=</span> <span class="s">1433  </span>
+<span class="err">tds</span> <span class="py">version</span> <span class="p">=</span> <span class="s">8.0  </span></code></pre></figure>
+
+<p>三. 准备配置文件(/usr/local/etc/odbcinst.ini)</p>
+
+<figure class="highlight"><pre><code class="language-properties" data-lang="properties"><span class="err">[FreeTDS]</span>
+<span class="py">Description</span> <span class="p">=</span> <span class="s">FreeTDS Driver v0.91  </span>
+<span class="py">Driver</span> <span class="p">=</span> <span class="s">/usr/local/Cellar/freetds/0.91_2/lib/libtdsodbc.so  </span>
+<span class="py">Setup</span> <span class="p">=</span> <span class="s">/usr/local/Cellar/freetds/0.91_2/lib/libtdsodbc.so  </span>
+<span class="py">Trace</span> <span class="p">=</span> <span class="s">yes  </span>
+<span class="py">TraceFile</span> <span class="p">=</span> <span class="s">/tmp/odbc.log  </span>
+<span class="py">fileusage</span><span class="p">=</span><span class="s">1  </span>
+<span class="py">dontdlclose</span><span class="p">=</span><span class="s">1  </span>
+<span class="py">UsageCount</span><span class="p">=</span><span class="s">1  </span></code></pre></figure>
+
+<p>四. 准备配置文件(/usr/local/etc/odbc.ini)</p>
+
+<figure class="highlight"><pre><code class="language-properties" data-lang="properties"><span class="err">[cactus]</span>  
+<span class="py">Description</span> <span class="p">=</span> <span class="s">MSSQL Server  </span>
+<span class="py">Driver</span> <span class="p">=</span> <span class="s">FreeTDS  </span>
+<span class="py">Server</span> <span class="p">=</span> <span class="s">cactus  </span>
+<span class="py">Port</span>  <span class="p">=</span> <span class="s">1433  </span>
+<span class="py">tds_version</span> <span class="p">=</span> <span class="s">8.0  </span></code></pre></figure>
+
+<p>五. Perl测试程序</p>
+
+<figure class="highlight"><pre><code class="language-perl" data-lang="perl"><span class="c1">#!/usr/bin/perl</span>
+<span class="k">use</span> <span class="nv">warnings</span><span class="p">;</span>
+<span class="k">use</span> <span class="nv">strict</span><span class="p">;</span>
+<span class="k">use</span> <span class="nv">DBI</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">Data::</span><span class="nv">Dump</span><span class="p">;</span>
+
+<span class="k">my</span> <span class="nv">$dbh</span> <span class="o">=</span> <span class="nv">DBI</span><span class="o">-&gt;</span><span class="nb">connect</span><span class="p">(</span>
+    <span class="s">'dbi:ODBC:cactus'</span><span class="p">,</span>
+    <span class="s">'hary'</span><span class="p">,</span>
+    <span class="s">'jessie'</span><span class="p">,</span>
+    <span class="p">{</span>
+
+      <span class="nv">RaiseError</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nv">AutoCommit</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+    <span class="p">}</span>
+<span class="p">)</span> <span class="o">||</span> <span class="nb">die</span> <span class="s">"Database connection not made: $DBI::errstr"</span><span class="p">;</span>
+
+<span class="nb">warn</span> <span class="s">"连接数据库成功"</span><span class="p">;</span>
+
+<span class="nv">$dbh</span><span class="o">-&gt;</span><span class="k">do</span><span class="p">(</span><span class="s">"use batchtest"</span><span class="p">);</span>
+
+<span class="nb">warn</span> <span class="s">"设置schema成功"</span><span class="p">;</span>
+
+<span class="k">my</span> <span class="nv">$sth</span> <span class="o">=</span> <span class="nv">$dbh</span><span class="o">-&gt;</span><span class="nv">prepare</span><span class="p">(</span><span class="sx">qq/select top 10 * from ApplicationOverDueObjects1103/</span><span class="p">);</span>
+
+<span class="nv">$sth</span><span class="o">-&gt;</span><span class="nv">execute</span><span class="p">();</span>
+
+<span class="k">while</span><span class="p">(</span> <span class="k">my</span> <span class="nv">$href</span> <span class="o">=</span> <span class="nv">$sth</span><span class="o">-&gt;</span><span class="nv">fetchrow_hashref</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nn">Data::</span><span class="nv">Dump</span><span class="o">-&gt;</span><span class="nb">dump</span><span class="p">(</span><span class="nv">$href</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Liquid error: Included file ‘_includes/JB/setup’ not found</p>

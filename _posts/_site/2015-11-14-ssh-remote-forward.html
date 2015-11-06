@@ -1,0 +1,74 @@
+<p>Liquid error: Included file ‘_includes/JB/setup’ not found</p>
+
+<h1 id="ssh-">SSH端口转发-远程转发</h1>
+
+<h2 id="section">问题描述</h2>
+<ol>
+  <li>假设有四台主机分别为</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text"> 
+   remote-gate : 127.0.1.1  # 远程的ssh服务器, 有个用户rg
+   remote-box  : 127.0.1.2  # 远程的某个应用, 
+   
+   local-gate  : 127.0.0.1  # 远程的ssh服务器, 有个用户lg
+   local-app   : 127.0.0.2  # 远程的某台pc机器
+   </code></pre></figure>
+
+<ol>
+  <li>local-app上有个服务在9494端口上提供服务</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-perl" data-lang="perl"> 
+   <span class="c1">#!/usr/bin/perl</span>
+   <span class="k">use</span> <span class="nn">Zeta::POE::</span><span class="nv">HTTPD</span><span class="p">;</span>
+   <span class="k">use</span> <span class="nv">POE</span><span class="p">;</span>
+
+   <span class="nn">Zeta::POE::</span><span class="nv">HTTPD</span><span class="o">-&gt;</span><span class="nv">spawn</span><span class="p">(</span> 
+       <span class="nv">ip</span>       <span class="o">=&gt;</span> <span class="s">'127.0.02'</span><span class="p">,</span>
+       <span class="nv">port</span>     <span class="o">=&gt;</span> <span class="mi">9494</span><span class="p">,</span> 
+       <span class="nv">callback</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span> <span class="s">'hello world'</span><span class="p">;</span> <span class="p">},</span>
+   <span class="p">);</span>
+   <span class="nv">$poe_kernel</span><span class="o">-&gt;</span><span class="nv">run</span><span class="p">();</span>
+   <span class="nb">exit</span> <span class="mi">0</span><span class="p">;</span>
+   </code></pre></figure>
+
+<ol>
+  <li>现在remote-box这台机器要访问local-app上的9494这个服务</li>
+</ol>
+
+<h1 id="section-1">解决方案</h1>
+<ol>
+  <li>在local-gate上执行</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"> 
+   ssh -CfNg -R 5555:local-app:9494 rg@remote-gate
+   <span class="c"># 解释</span>
+   <span class="c"># 1. 将使得remote-gate上启一个后台进程在5555端口listen</span>
+   <span class="c"># 2. 当remote-box访问remote-gate:5555时, local-gate将访问local-app:9494</span>
+   <span class="c"># 3. 看起来好像是remote-box直接访问local-app一样</span>
+   </code></pre></figure>
+
+<ol>
+  <li>
+    <p>图示</p>
+
+    <p><img src="images/remote_proxy.png" alt="remote-box----&gt;remote-gate:5555===隧道====local-gate-----&gt;local-app:9494" /></p>
+  </li>
+  <li>
+    <p>例子</p>
+  </li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"> 
+   <span class="c"># 在local-app上启动9494服务</span>
+   ./svc.pl <span class="s1">'127.0.0.2'</span> 9494
+
+   <span class="c"># 在local-gate(127.0.0.1)上建立本地转发隧道</span>
+   ssh -CfNg -R 5555:127.0.0.2:9494 zhouchao@127.0.1.1
+
+   <span class="c"># 在remote-box发起到127.0.1.1:5555访问</span>
+   GET <span class="s1">'http://127.0.1.1:5555/'</span>
+   </code></pre></figure>
+

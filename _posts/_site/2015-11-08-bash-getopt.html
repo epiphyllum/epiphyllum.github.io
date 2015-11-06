@@ -1,0 +1,70 @@
+<p>Liquid error: Included file ‘_includes/JB/setup’ not found</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">今天看了下bash的getopt, 写了个例子, 记下来。
+
+<span class="c">#!/bin/bash</span>
+
+<span class="c">#</span>
+<span class="c"># ./getopt.sh  -c config a b -u   -d "this is desc" --work-dir "/"  --verbose</span>
+<span class="c">#</span>
+
+<span class="c">#   function Usage</span>
+<span class="k">function </span>Usage <span class="o">{</span>
+    <span class="nb">echo</span> <span class="s2">"Usage:"</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"    </span><span class="nv">$0</span><span class="s2"> Foo Bar [Option]"</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"Option:"</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"    Foo                       The input file."</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"    Bar                       The output file."</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"        --help                Display this message and exit."</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"        --verbose             Verbose mode."</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"        --work-dir [P]        The working directory."</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"    -c, --config-file [F]     Set configure file."</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"    -u, --unk                 Consider unknown words."</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"    -d, --desc-str [S]        Set description string."</span> 1&gt;&amp;2
+    <span class="nb">echo</span> <span class="s2">"Example:"</span>
+    <span class="nb">echo</span> <span class="s2">"./getopt.sh --config-file /etc/passwd a b --unk --desc-str 'this is a desc str' --work-dir . --verbose"</span>;
+    <span class="nb">exit </span>1
+<span class="o">}</span>
+ 
+<span class="c">#   parse argument</span>
+<span class="nb">eval set</span> -- <span class="s2">"</span><span class="k">$(</span>getopt -n <span class="nv">$0</span> -o <span class="s2">"c:ud:"</span> -l <span class="s2">"help,verbose,work-dir:,config-file:,unk,desc-str:"</span> <span class="s2">"--"</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
+<span class="k">if</span>  <span class="o">[</span> <span class="nv">$?</span> -ne 0 <span class="o">]</span>
+<span class="k">then
+    </span>Usage
+<span class="k">fi
+
+</span><span class="nb">echo</span> <span class="s2">"argv now [</span><span class="nv">$@</span><span class="s2">] [</span><span class="nv">$*</span><span class="s2">]"</span>;
+<span class="nb">echo</span> <span class="s2">"begin parse argument........"</span>;
+<span class="k">for </span>arg
+<span class="k">do</span>
+    <span class="c"># echo "encounter [$arg]";</span>
+    <span class="k">case</span> <span class="s2">"</span><span class="nv">$arg</span><span class="s2">"</span> <span class="k">in</span>
+       --help<span class="p">)</span>            Usage; <span class="nb">shift</span><span class="p">;;</span>
+       --verbose<span class="p">)</span>         <span class="nv">verbose</span><span class="o">=</span>1; <span class="nb">shift</span><span class="p">;;</span>
+       --work-dir<span class="p">)</span>        <span class="nb">shift</span>; <span class="nv">work_dir</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>; <span class="nb">shift</span><span class="p">;;</span>
+       -c|--config-file<span class="p">)</span>  <span class="nb">shift</span>; <span class="nv">config_file</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>; <span class="nb">shift</span><span class="p">;;</span>
+       -u|--unk<span class="p">)</span>          <span class="nv">unk</span><span class="o">=</span>1;   <span class="nb">shift</span><span class="p">;;</span>
+       -d|--desc-str<span class="p">)</span>     <span class="nb">shift</span>; <span class="nv">desc_str</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>; <span class="nb">shift</span><span class="p">;;</span>
+       --<span class="p">)</span>                <span class="nb">shift</span>; <span class="nb">break</span><span class="p">;;</span>
+    <span class="k">esac</span>
+<span class="k">done</span>
+ 
+<span class="c">#   rest paremeters</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$# </span>-lt 2 <span class="o">]</span>
+<span class="k">then
+    </span>Usage
+<span class="k">fi
+</span><span class="nv">input_file</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="nv">output_file</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+
+<span class="nb">echo</span> <span class="s2">"get the following argument:"</span>;
+<span class="nb">echo</span> <span class="s2">"----------------------------------------"</span>;
+<span class="nb">echo</span> <span class="s2">"verbose         =&gt; </span><span class="nv">$verbose</span><span class="s2">"</span>;
+<span class="nb">echo</span> <span class="s2">"unk             =&gt; </span><span class="nv">$unk</span><span class="s2">"</span>;
+<span class="nb">echo</span> <span class="s2">"d|desc-str      =&gt; </span><span class="nv">$desc_str</span><span class="s2">"</span>;
+<span class="nb">echo</span> <span class="s2">"c|config-file   =&gt; </span><span class="nv">$config_file</span><span class="s2">"</span>;
+<span class="nb">echo</span> <span class="s2">"verbose         =&gt; </span><span class="nv">$verbose</span><span class="s2">"</span>;
+<span class="nb">echo</span> <span class="s2">"work-dir        =&gt; </span><span class="nv">$work_dir</span><span class="s2">"</span>;
+<span class="nb">echo</span> <span class="s2">"input           =&gt; </span><span class="nv">$input_file</span><span class="s2">"</span>;
+<span class="nb">echo</span> <span class="s2">"output          =&gt; </span><span class="nv">$output_file</span><span class="s2">"</span>;</code></pre></figure>
+
