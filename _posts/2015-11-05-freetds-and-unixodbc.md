@@ -6,6 +6,9 @@ category: "tools"
 tags: [ "unixodbc", "freetds" ]
 ---
 
+公司使用的SqlServer数据库，如果想在linux下写个perl/php程序来访问SQLServer, 比较麻烦, SQLServer好像没有Linux/Mac下的驱动
+还好， 有个freetds unixodbc的好东东。 
+
 ## ubuntu 14.04
 
 一. 安装unixodbc, freetds
@@ -15,6 +18,43 @@ sudo apt-get install freetds-bin freetds-common freetds-dev libct4 libsybdb5 \
     unixodbc unixodbc-dev unixodbc-bin libodbc1 odbcinst1debian2
 {% endhighlight %}
 
+二. 准备配置文件(/etc/freetds/freetds.conf)
+
+{% highlight properties %}
+[cactus]
+host = cactus
+port = 1433
+tds version = 8.0
+{% endhighlight %}
+
+
+三. 准备配置文件(/etc/odbcinst.ini)
+{% highlight properties %}
+[FreeTDS]
+Description = FreeTDS Driver v0.91
+Driver = /usr/lib/x86_64-linux-gnu/odbc/libtdsodbc.so
+Setup = /usr/lib/x86_64-linux-gnu/odbc/libtdsS.so
+fileusage=1
+dontdlclose=1
+UsageCount=1
+Trace = yes
+TraceFile = /tmp/odbc.log
+{% endhighlight %}
+
+
+四. 准备配置文件(/etc/odbc.ini)
+{% highlight properties %}
+[cactus]
+Description = sqlserver@cactus
+Driver = FreeTDS
+Server = cactus
+Port = 1433
+
+# 这个是个坑爹的配置啊！！！！ 一定加上
+tds_version = 8.0
+{% endhighlight %}
+
+五. Perl测试程序(见mac部分)
 
 ## mac
 
