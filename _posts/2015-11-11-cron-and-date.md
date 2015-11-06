@@ -5,7 +5,6 @@ description: "cron中的date命令"
 category: "bash"
 tags: ["bash",  "cron",  "date"]
 ---
-{% include JB/setup %}
 
 {% highlight text %}
 今天配置crontab遇到一个很奇怪的问题， 配置如下:
@@ -19,4 +18,5 @@ tags: ["bash",  "cron",  "date"]
 40 * * * * /home/hary/bin/backup.pl `/bin/date +\%Y\%m\%d`
 {% endhighlight %}
 
+{% include JB/setup %}
 

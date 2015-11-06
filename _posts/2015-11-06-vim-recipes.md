@@ -5,7 +5,6 @@ description: "vim技巧"
 category: "tools"
 tags: ["vim"]
 ---
-{% include JB/setup %}
 
 ### 可视模式修改命令
 {% highlight text %}
@@ -113,4 +112,6 @@ R  - replace
 3<<  -
 
 {% endhighlight %}
+
+{% include JB/setup %}
 

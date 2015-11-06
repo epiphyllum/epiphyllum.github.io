@@ -5,7 +5,6 @@ description: "bash getopt"
 category: "bash"
 tags: ["bash", "getopt"]
 ---
-{% include JB/setup %}
 
 
 {% highlight bash %}
@@ -78,3 +77,7 @@ echo "output          => $output_file";
 
 
 {% endhighlight %}
+
+
+{% include JB/setup %}
+
