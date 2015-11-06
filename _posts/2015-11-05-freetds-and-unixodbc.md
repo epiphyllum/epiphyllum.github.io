@@ -25,7 +25,7 @@ brew install unixodbc
 brew install freetds --with-unixodbc
 {% endhighlight %}
 
-二. 准备配置文件(freetds.conf)
+二. 准备配置文件(/usr/local/etc/freetds.conf)
 
 {% highlight properties %}
 [cactus]  
@@ -34,7 +34,7 @@ port = 1433
 tds version = 8.0  
 {% endhighlight %}
 
-三. 准备配置文件(odbcinst.ini)
+三. 准备配置文件(/usr/local/etc/odbcinst.ini)
 
 {% highlight properties %}
 [FreeTDS]
@@ -49,7 +49,7 @@ UsageCount=1
 
 {% endhighlight %}
 
-四. 准备配置文件(odbc.ini)
+四. 准备配置文件(/usr/local/etc/odbc.ini)
 
 {% highlight properties %}
 [cactus]  
@@ -97,5 +97,3 @@ while( my $href = $sth->fetchrow_hashref ) {
 {% endhighlight %}
 
 
-
-{% include JB/setup %}
