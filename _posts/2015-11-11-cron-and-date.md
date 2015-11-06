@@ -3,7 +3,7 @@ layout: post
 title: "当cron遇到date命令"
 description: "cron中的date命令"
 category: "bash"
-tags: ["bash cron date"]
+tags: ["bash",  "cron",  "date"]
 ---
 {% include JB/setup %}
 

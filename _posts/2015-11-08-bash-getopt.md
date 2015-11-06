@@ -3,7 +3,7 @@ layout: post
 title: "bash getopt"
 description: "bash getopt"
 category: "bash"
-tags: ["bash getopt"]
+tags: ["bash", "getopt"]
 ---
 {% include JB/setup %}
 
