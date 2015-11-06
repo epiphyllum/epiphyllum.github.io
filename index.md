@@ -5,7 +5,7 @@ tagline: Supporting tagline
 ---
 {% include JB/setup %}
 
-## My Posts
+## 我的文章
 
 <ul class="posts">
   {% for post in site.posts %}
