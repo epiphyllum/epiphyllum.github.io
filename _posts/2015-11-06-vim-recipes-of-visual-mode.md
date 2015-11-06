@@ -7,17 +7,14 @@ tags: ["vim"]
 ---
 {% include JB/setup %}
 
-### 可视模式修改命令
 
 {% highlight markdown %}
-|  命令  |  用途 |
-| :---   | :---  |
-|  v     | 面向字符的可视模式 |
-|  V     | 面向行的可视模式 |
-|  C-v   | 面向列块的可视模式 |
-|  gv    | 重写上次高亮选取 |
-|  o     | 切换高亮选取的活动端 |
-{% endhighlight %}
+### 可视模式修改命令
+    v     =>  面向字符的可视模式 
+    V     =>  面向行的可视模式  
+    C-v   =>  面向列块的可视模式  
+    gv    =>  重写上次高亮选取  
+    o     =>  切换高亮选取的活动端 
 
 ### gU{motion} / gu{motion}
 
@@ -33,4 +30,5 @@ tags: ["vim"]
     vi"  是选择双引号之内的东西"toselect"  
     vi{  是选择大括号之内的东西{toselect}  
     
+{% endhighlight %}
 
