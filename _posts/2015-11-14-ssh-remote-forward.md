@@ -54,7 +54,7 @@ tags: ["ssh", "forward", "proxy"]
 
 2. 图示
 
-   ![remote-box---->remote-gate:5555===隧道====local-gate----->local-app:9494](images/remote_proxy.png)
+   ![remote-box---->remote-gate:5555===隧道====local-gate----->local-app:9494](assets/images/remote_proxy.png)
 
 3. 例子
   

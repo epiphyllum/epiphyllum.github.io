@@ -53,7 +53,7 @@ tags: ["ssh", "forward", "proxy"]
 
 2. 图示
 
-   ![local-box---->local-gate:5555===隧道====remote-gate----->remote-app:9494](images/local_proxy.png)
+   ![local-box---->local-gate:5555===隧道====remote-gate----->remote-app:9494](assets/images/local_proxy.png)
 3. 例子
    
    {% highlight bash %}  
