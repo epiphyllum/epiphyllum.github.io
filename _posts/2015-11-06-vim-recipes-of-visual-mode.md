@@ -8,7 +8,7 @@ tags: ["vim"]
 {% include JB/setup %}
 
 
-{% highlight markdown %}
+{% highlight text %}
 ### 可视模式修改命令
     v     =>  面向字符的可视模式 
     V     =>  面向行的可视模式  
