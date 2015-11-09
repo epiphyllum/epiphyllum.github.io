@@ -40,13 +40,14 @@ class MySpecification extends Specification {
 
         when:  "Stimulus"
 
+        // then部分， 每个表达式都是个boolean!!!!
         then:  "Response"
         stack.size() == 1
         stack.peek() == elem
         !stack.empty
-        thrown(EmptyStackException)
-        EmptyStackException e = thrown()
-        notThrown(EmptyStackException)
+        thrown(EmptyStackException)      // 抛出了指定类型的异常
+        EmptyStackException e = thrown() // 获得抛出的异常!!!
+        notThrown(EmptyStackException)   // 没有抛出异常
 
         1 * subscriber1.recieve("event")   // 交互测试
         1 * subscriber2.recieve("event")   // 交互测试
@@ -93,7 +94,7 @@ class MathSpec extends Specification {
 
 多变量的DataPipe
 {% highlight groovy %}
-@Shared sql = Sql.newInstance("jdbc:h2:mem:", "org.h2.Driver"")
+@Shared sql = Sql.newInstance("jdbc:h2:mem:", "org.h2.Driver")
 
 def "maximum of two numbers"() {
     where:
@@ -122,24 +123,38 @@ c = a > b ? a : b    // assignment
 
 ### 交互测试
 
-mock
+mock: 描述被测试对象(object under specification)与协作对象(collaborators)之间的交互!!
 {% highlight groovy %}
 
-def subscriber1 = Mock()   // 
-def subscriber2 = Mock()   // 
+def subscriber = Mock(Subscriber)   // 
 
-when:
-publisher.send("hello")
+def Subscriber subscriber1 = Mock()   //  推荐!!!
+def Subscriber subscriber2 = Mock()   // 
 
-then:  
-1 * subscriber1.recieve("hello")       // subscriber1.recieve("hello") 被调用一次
-1 * subscriber2.recieve("hello")
+
+def  "should send messages to all subscribers"() {
+  when:
+  publisher.send("hello")
+
+  then:  
+  1 * subscriber1.recieve("hello")       // subscriber1.recieve("hello") 被调用一次
+  1 * subscriber2.recieve("hello")
+}
+// 这里可以这么解读: 
+// 当publisher发布一个hello消息, 
+// 则subsriber1与subscriber2都会收到hello消息一次
+
+
+// 基数限制: Cardinality constraint
 (1..3) * subscriber2.recieve("hello")  // 1到三次
 (1.._) * subscriber2.recieve("hello")  // 1次以上
 (_..3) * subscriber2.recieve("hello")  // 0到三次
 
 // 方法constraints
 (_..3) * subscriber2./r.*e/("hello")   // 方法满足正则
+
+// 目标constraints:
+1 * /^sub*/.recieve("hello")
 
 // 参数constraints
 (_..3) * subscriber2.recieve(_ as String)        // 参数为字符串
@@ -158,15 +173,34 @@ interaction {
     1 * subscriber1.receive(message)
 }
 
+// 注意:
+1 * subscriber.status           // 1 * subsrcriber.getStatus()
+1 * subscriber.setStatus("ok")  // setter必须这么写!!!
+
 // 测试invocation order
 // 假设发送消息为: "hello" "hello" "goodbye", "hello" "goodbye" "hello"
 then:
 2 * subscriber.recieve("hello")
 1 * subscriber.recieve("goodbye")
+
+then:
 1 * subscriber.recieve("hello")
 1 * subscriber.recieve("goodbye")
+
+then:
 1 * subscriber.recieve("hello")
 
+{% endhighlight %}
+
+严格mocking(Strict Mocking)
+{% highlight groovy %}
+when:
+publisher.publish("hello")
+
+then:
+1 * subscriber.receive("hello") // subscriber收到hello消息一次
+_ * auditing._                  // 允许与auditing有任意的交互
+0 * _                           // 没有其他交互!!
 {% endhighlight %}
 
 stub
