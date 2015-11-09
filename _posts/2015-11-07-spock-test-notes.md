@@ -15,10 +15,11 @@ import spock.lang.*
 ### Specification
 {% highlight groovy %}
 class MySpecification extends Specification {
-    // fields
+    // fields,  每个feature方法都会重新创建
     def obj = new ClassUnderSpecification()
     def col1 = new Collaborator()
 
+    // 只被创建一次
     @Shared res = new VeryExpensiveResource()
 
     // constants
@@ -130,26 +131,28 @@ def subscriber2 = Mock()   //
 when:
 publisher.send("hello")
 
-then:
-1 * subscriber1.recieve("hello")
+then:  
+1 * subscriber1.recieve("hello")       // subscriber1.recieve("hello") 被调用一次
 1 * subscriber2.recieve("hello")
-(1..3) * subscriber2.recieve("hello")
-(1.._) * subscriber2.recieve("hello")
-(_..3) * subscriber2.recieve("hello")
+(1..3) * subscriber2.recieve("hello")  // 1到三次
+(1.._) * subscriber2.recieve("hello")  // 1次以上
+(_..3) * subscriber2.recieve("hello")  // 0到三次
 
 // 方法constraints
-(_..3) * subscriber2./r.*e/("hello")    
+(_..3) * subscriber2./r.*e/("hello")   // 方法满足正则
 
 // 参数constraints
-(_..3) * subscriber2.recieve(_ as String)    
-(_..3) * subscriber2.recieve({ it.size() > 3 })
-(_..3) * subscriber2.recieve(!null)
-(_..3) * subscriber2.recieve(_)
-(_..3) * subscriber2.recieve(*_)
-(_..3) * subscriber2.recieve(!"hello")
+(_..3) * subscriber2.recieve(_ as String)        // 参数为字符串
+(_..3) * subscriber2.recieve({ it.size() > 3 })  // 参数的size > 3
+(_..3) * subscriber2.recieve(!null)              // 参数不为null
+(_..3) * subscriber2.recieve(_)                  // 任何参数
+(_..3) * subscriber2.recieve(*_)                 // 任意个参数
+(_..3) * subscriber2.recieve(!"hello")           // 不是"hello"
 
+// 第三个参数任意, 第四个参数不为null, 第五个参数必须是"abc"或者"def"
 1 * process.invoke("ls", "-a", _, !null, { ["abc", "def"].contains(it)} )
 
+// 交互测试断言中有变量， 必须用interaction块
 interaction {
     def message = "hello"
     1 * subscriber1.receive(message)
@@ -169,19 +172,17 @@ then:
 stub
 {% highlight groovy %}
 
-
-
 given:
 def subscriber = Stub(Subscriber)
-Subscriber subscriber = Stub()
+Subscriber subscriber = Stub()    // 推荐方式!!!!
 
-subscriber.recieve >> "abc"
-subscriber.recieve >>> []
-subscriber.recieve >> { args -> args[0].size() > 3 "ok" : "fail" }
-subscriber.recieve >> { throw new InternalError("ouch") }
-subscriber.recieve >>> ["ok", "fail", "ok"] >> { throw new InternalError() } >> "ok"   // chained
+subscriber.recieve(_) >> "abc"
+subscriber.recieve(_) >>> ["abc", "def"]  // 第一次返回"abc", 第二次返回"def"
+subscriber.recieve(_) >> { args -> args[0].size() > 3 "ok" : "fail" }
+subscriber.recieve(_) >> { throw new InternalError("ouch") }  // 执行副作用
+subscriber.recieve(_) >>> ["ok", "fail", "ok"] >> { throw new InternalError() } >> "ok"   // chained
 
-//
+// 另外一种设置stub的方法!!!
 def subscriber = Stub(Subscriber) {
     recieve("message1") >> "ok"
     recieve("message2") >> "fail"
@@ -191,10 +192,26 @@ def subscriber = Stub(Subscriber) {
 
 结合mock与stub
 
+当mocking与stubbing同一个方法调用时, 必须在同一个interaction中指定！！！
+如下的方式是错误的。 
+{% highlight groovy %}
+setup:
+subscriber.receive("message1") >> "ok"
+
+when:
+publisher.send("message1")
+
+then:
+1 * subscriber.receive("message1")
+{% endhighlight %}
+上面的代码执行过程是这样的:
+then部分的recieve首先被match, 由于这里并没有指定response, 
+这里的return为nul。 setup部分的没有机会match
+正确的做法如下:
 {% highlight groovy %}
 then:
 1 * subscriber.recieve("message1") >> "ok"        // "message1"消息收到一次且处理结果是ok
-1 * subscriber.recieve("message2") >> "fail"
+1 * subscriber.recieve("message2") >> "fail"      // "message2"消息收到一次且处理结果是fail
 {% endhighlight %}
 
 
@@ -203,8 +220,32 @@ Spyies 用于对具体对象的部分功能覆盖。 比方说A类有x, y, z三�
 
 given:
 def subscriber = Spy(SubscriberImpl, constructorArgs: ["Fred"])
-subscriber.recieve(_) >> { String message -> callRealMethod(); message.size() > 3 ? "ok":"fail" }
+subscriber.recieve(_) >> { 
+  //
+  // 调用SubscriberImpl的方法!!! , 这里并没有给callRealMethod传递参数! 
+  // 参数被自动加上
+  // 如果我们想传递不同的参数给实际方法可以用callRealMethodWithArgs("changeds message")
+  //
+  String message -> callRealMethod();    
+  message.size() > 3 ? "ok":"fail" 
+}
 
 {% endhighlight %}
 
+Spy作部分mock(Spy as partial mocks)
+
+{% highlight groovy %}
+
+// persister现在时被测对象!
+def persister = Spy(MessagePersister) {
+    isPersistable(_) >> true
+}
+
+when:
+persister.receive(msg")
+
+then:
+1 * persister.persist("msg")
+
+{% endhighlight %}
 
