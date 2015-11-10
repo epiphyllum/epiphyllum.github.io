@@ -53,7 +53,7 @@ ssh -CfNg -L 5555:remote-app:9494 rg@remote-gate
 
 2. 图示
 
-   ![local-box---->local-gate:5555===隧道====remote-gate----->remote-app:9494]({{ site.url }}/assets/images/local_proxy.png)
+   ![本地转发]({{ site.url }}/assets/images/local_proxy.png)
 3. 例子
    
 {% highlight bash %}  
