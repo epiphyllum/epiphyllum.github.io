@@ -203,23 +203,44 @@ _ * auditing._                  // 允许与auditing有任意的交互
 0 * _                           // 没有其他交互!!
 {% endhighlight %}
 
-stub
+stub: 设置collaborators对方法调用的表现出指定的响应！
 {% highlight groovy %}
 
 given:
 def subscriber = Stub(Subscriber)
 Subscriber subscriber = Stub()    // 推荐方式!!!!
 
+
+// 返回固定值
 subscriber.recieve(_) >> "abc"
+
+// 返回sequences
 subscriber.recieve(_) >>> ["abc", "def"]  // 第一次返回"abc", 第二次返回"def"
-subscriber.recieve(_) >> { args -> args[0].size() > 3 "ok" : "fail" }
+
+// 返回计算值
+subscriber.recieve(_) >> { args -> args[0].size() > 3 "ok" : "fail" }   
+
+// sideeffects
 subscriber.recieve(_) >> { throw new InternalError("ouch") }  // 执行副作用
+
+// chained
 subscriber.recieve(_) >>> ["ok", "fail", "ok"] >> { throw new InternalError() } >> "ok"   // chained
 
 // 另外一种设置stub的方法!!!
 def subscriber = Stub(Subscriber) {
     recieve("message1") >> "ok"
     recieve("message2") >> "fail"
+}
+
+// 依据不同的参数给出不同的行为!!
+given:
+User user = Stub()
+user.updateRoleAndReturnPreviousOne(_) { Role role ->
+  if ( Role.ADMIN == role) {
+    throw new IllegalArgumentException()
+  } else {
+    return Role.USER
+  }
 }
 
 {% endhighlight %}
@@ -282,4 +303,34 @@ then:
 1 * persister.persist("msg")
 
 {% endhighlight %}
+
+
+总结下Mock, Stub, Spy
+
+{% highlight text %}
+从实现上看，mock和stub都是通过创建自己的对象来替代次要测试对象，然后按照测试的需要控制这个对象的行为。
+interaction-based   => Mock
+state-based         => Stub
+
+对于mock来说，exception是重中之重：
+我们期待方法有没有被调用，
+期待适当的参数，
+期待调用的次数，
+甚至期待多个mock之间的调用顺序。
+所有的一切期待都是事先准备好，
+在测试过程中和测试结束后验证是否和预期的一致。
+
+而对于stub，
+通常都不会关注exception。
+虽然理论上某些stub实现也可以通过自己编码的方式增加对expectiation的内容，
+比如增加一个计数器，每次调用+1之类，但是实际上极少这样做。
+
+
+Spy是对实现好的对象的wrapper, spy可以用于覆盖部分
+被wrap的对象的行为。 
+Spy的调用会转发到真实对象的调用！！！！
+spy也可以设置交互行为
+
+{% endhighlight %}
+
 
