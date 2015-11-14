@@ -2,8 +2,8 @@
 layout: post
 title: "aliyun队列的一种封装"
 description: ""
-category: 
-tags: []
+category: "cloud"
+tags: ["cloud", "rest"]
 ---
 {% include JB/setup %}
 
