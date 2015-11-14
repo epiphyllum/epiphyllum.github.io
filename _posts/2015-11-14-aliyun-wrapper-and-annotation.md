@@ -23,13 +23,13 @@ public class Contact {
 二.  定义服务接口
 
 {% highlight java %}
-@QueueName("helloQ")    
+@QueueName("helloQ")   // 采用helloQ作为消息队列传输数据
 public interface ContactQResource {
 
    @MessageParam(path = "/getContact")
    void getContact(int id);
 
-   @MessageParam(path = "/createContact")
+   @MessageParam(path = "/createContact", delay = 10)   //  延迟发送
    void createContact(Contact contact);
 }
 {% endhighlight %}
