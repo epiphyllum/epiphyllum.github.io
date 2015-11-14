@@ -7,6 +7,13 @@ tags: []
 ---
 {% include JB/setup %}
 
+公司使用Aliyun的消息队列作为基础设施, 模仿REST, 我做了下封装， 基本思路如下:
+
+1. 队列的消息是任意的Pojo对象, 对比于REST中的Representation
+2. 定义服务接口, 类似于REST中的Resource, 定义了几个简单的annotation:  QueueName, MessagePram( path="/xxxx", delay=10 )
+3. 服务端实现Resource接口
+4. 提供客户端ResourceFactory, 客户端直接调用方法, 无需了解队列的存在!
+
 一. 定义消息Pojo
 
 {% highlight java %}
@@ -73,8 +80,9 @@ public class QServer {
 {% highlight java %}
 public class QClient {
     public static void main(String[] args) {
+
         QueueProvider queueProvider = new AliQueueProvider();
-        ContactQResource resource = QResourceFactory.getResource(ContactQResource.class, queueProvider);
+        ContactQResource resource = QResourceFactory.getResource(ContactQResource.class, queueProvider);  // 取得Resource的本地代理对象
         // resource.getContact(10);
 
         resource.createContact(new Contact("hary", "zhou", 11));
