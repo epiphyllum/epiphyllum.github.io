@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "aliyun队列的一种封装"
-description: ""
+description: "模仿rest的annotation对队列进行服务的封装"
 category: "cloud"
 tags: ["cloud", "rest"]
 ---
