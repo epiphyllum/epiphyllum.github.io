@@ -13,6 +13,7 @@ tags: []
 2. 定义服务接口, 类似于REST中的Resource, 定义了几个简单的annotation:  QueueName, MessagePram( path="/xxxx", delay=10 )
 3. 服务端实现Resource接口
 4. 提供客户端ResourceFactory, 客户端直接调用方法, 无需了解队列的存在!
+5. 代码在我的github上[cloudservice-wrapper](https://github.com/epiphyllum/cloudservice-wrapper.git), 欢迎拍砖
 
 一. 定义消息Pojo
 
