@@ -84,5 +84,5 @@ public class QClient {
 }
 {% endhighlight %}
 
-六. 代码在我的github上欢迎讨论[cloud-service-wrapper](https://github.com/epiphyllum/cloudservice-wrapper.git)
+六. 代码在我的github上[cloudservice-wrapper](https://github.com/epiphyllum/cloudservice-wrapper.git), 欢迎讨论
 
