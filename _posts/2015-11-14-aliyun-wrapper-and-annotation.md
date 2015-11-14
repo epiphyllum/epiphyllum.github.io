@@ -7,7 +7,7 @@ tags: []
 ---
 {% include JB/setup %}
 
-1. 定义消息Pojo
+一. 定义消息Pojo
 
 {% highlight java %}
 
@@ -20,7 +20,7 @@ public class Contact {
 
 {% endhighlight %}
 
-2.  定义服务接口
+二.  定义服务接口
 
 {% highlight java %}
 @QueueName("helloQ")    
@@ -34,7 +34,7 @@ public interface ContactQResource {
 }
 {% endhighlight %}
 
-3. 服务实现
+三. 服务实现
 {% highlight java %}
 
 public class ContactQResourceImpl implements ContactQResource {
@@ -55,7 +55,7 @@ public class ContactQResourceImpl implements ContactQResource {
 }
 {% endhighlight %}
 
-4. bootstrap服务端
+四. bootstrap服务端
 
 {% highlight java %}
 public class QServer {
@@ -69,7 +69,7 @@ public class QServer {
 }
 {% endhighlight %}
 
-5. bootstrap客户端
+五. bootstrap客户端
 {% highlight java %}
 public class QClient {
     public static void main(String[] args) {
@@ -83,4 +83,6 @@ public class QClient {
     }
 }
 {% endhighlight %}
+
+六. 代码在我的github上欢迎讨论[cloud-service-wrapper](https://github.com/epiphyllum/cloudservice-wrapper.git)
 
