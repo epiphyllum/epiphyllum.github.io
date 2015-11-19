@@ -17,7 +17,7 @@ docker build -t hary/ubuntu-java8:1.0  .
 
 # 常用几个Dockefile中的命令
 
-{% highlight text %} 
+{% highlight bash %} 
 ENV  DT_HOME  /app/dt  # 设置环境变量, 程序中可以使用ENV设置的环境变量
 ADD  file.tar /app     # 会建立/app/file目录, file.tar是相对于Dockerfile所在目录的
 VOLUME  /app/dt/log    # 可以将本地目录挂载到/app/dt/log下。 在run的时候使用参数 -v local-path:/app/dt/log
@@ -70,12 +70,16 @@ CMD ["-l", "/var"]
 
 {% highlight text %} 
 docker run -it  --rm hary/a        # 实际执行的就是 ls -l
-docker run -it  --rm hary/a  /usr  # 实际执行的就是 ls -l /usr
+docker run -it  --rm hary/a  /usr  # 实际执行的就是 ls /usr
 docker run -it  --rm hary/b        # 实际执行的就是 ls -l /var
 docker run -it  --rm hary/b -a /root/  # 实际执行的就是 ls -a /root
 {% endhighlight %} 
 
-
+可以看到:
+如果容器启动时带参数， 则覆盖CMD的的参数。
+如果容器启动时不带参数，则用CMD的参数作为ENTRYPONIT的参数
+如果容器没有ENTRYPOINT, 则默认用CMD的启动
+如果容器没有ENTRYPOINT, 可以在启动时重新提供启动命令
 
 
 
