@@ -39,6 +39,7 @@ USER                   # 使用哪个用户跑container
 CMD的主要作用是为容器提供默认的执行命令, 或者给Entry Point提供默认的参数
 
 ## ENTRYPOINT
+
 {% highlight text %} 
 ENTRYPOINT ["executable", "param1", "param2"] (exec form, the preferred form)
 ENTRYPOINT command param1 param2 (shell form)
@@ -51,6 +52,7 @@ ENTRYPOINT主要是用来提供容器执行一直部分, ENTRYPOINT可以被继�
 ## 举例如下
 
 Dockerfile A 构建出的镜像是 hary/a
+
 {% highlight text %} 
 FROM ubuntu:14.04
 CMD ["-l"]
@@ -58,12 +60,14 @@ ENTRYPOINT ["ls"]
 {% endhighlight %} 
 
 Dockerfile B 从hary/a继承, 生成的镜像是hary/b
+
 {% highlight text %} 
 FROM hary/a
 CMD ["-l", "/var"]
 {% endhighlight %} 
 
 执行如下:
+
 {% highlight text %} 
 docker run -it  --rm hary/a        # 实际执行的就是 ls -l
 docker run -it  --rm hary/a  /usr  # 实际执行的就是 ls -l /usr
