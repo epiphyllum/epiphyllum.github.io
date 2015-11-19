@@ -18,6 +18,8 @@ docker build -t hary/ubuntu-java8:1.0  .
 # 常用几个Dockefile中的命令
 
 {% highlight bash %} 
+FROM ubuntu            # 从哪里继承  ubuntu:14.04  hary/ubuntu:14.04
+MAINTAINER hary 
 ENV  DT_HOME  /app/dt  # 设置环境变量, 程序中可以使用ENV设置的环境变量
 ADD  file.tar /app     # 会建立/app/file目录, file.tar是相对于Dockerfile所在目录的
 VOLUME  /app/dt/log    # 可以将本地目录挂载到/app/dt/log下。 在run的时候使用参数 -v local-path:/app/dt/log
@@ -47,7 +49,6 @@ ENTRYPOINT command param1 param2 (shell form)
 
 Dockerfile中只能有一个ENTRYPOINT
 ENTRYPOINT主要是用来提供容器执行一直部分, ENTRYPOINT可以被继承。 
-{% endhighlight %} 
 
 ## 举例如下
 
