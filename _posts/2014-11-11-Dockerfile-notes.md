@@ -76,11 +76,11 @@ docker run -it  --rm hary/b        # 实际执行的就是 ls -l /var
 docker run -it  --rm hary/b -a /root/  # 实际执行的就是 ls -a /root
 {% endhighlight %} 
 
-可以看到:
-如果容器启动时带参数， 则覆盖CMD的的参数。
-如果容器启动时不带参数，则用CMD的参数作为ENTRYPONIT的参数
-如果容器没有ENTRYPOINT, 则默认用CMD的启动
-如果容器没有ENTRYPOINT, 可以在启动时重新提供启动命令
+可以看到:  
+如果容器启动时带参数， 则覆盖CMD的的参数   
+如果容器启动时不带参数，则用CMD的参数作为ENTRYPONIT的参数  
+如果容器没有ENTRYPOINT, 则默认用CMD的启动  
+如果容器没有ENTRYPOINT, 可以在启动时重新提供启动命令  
 
 
 
