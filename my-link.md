@@ -5,9 +5,5 @@ description: ""
 ---
 {% include JB/setup %}
 
-[百度](http://www.baidu.com)  http://www.baidu.com  
-[百度](http://www.baidu.com)  http://www.baidu.com  
-[百度](http://www.baidu.com)  http://www.baidu.com  
-[百度](http://www.baidu.com)  http://www.baidu.com  
-[百度](http://www.baidu.com)  http://www.baidu.com  
-[百度](http://www.baidu.com)  http://www.baidu.com  
+## java资源
+[国外程序员整理的Java资源大全](http://www.importnew.com/14429.html)
