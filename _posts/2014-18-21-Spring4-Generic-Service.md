@@ -1,12 +1,11 @@
 ---
 layout: post
-title: "Spring4 范型service"
-description: "Spring4 范型service"
+title: "Spring4范型service注入"
+description: "Spring4范型service注入"
 category: "java"
 tags: ["java", "spring", "generic"]
 ---
 {% include JB/setup %}
-
 
 实体
 {% highlight java %}
@@ -21,7 +20,7 @@ public class Organization implements Serializable {
 }  
 {% endhighlight %}
 
-Repository
+数据访问Repository
 {% highlight java %}
 public abstract class BaseRepository<M extends Serializable> {  
     public void save(M m) {  
@@ -40,6 +39,7 @@ public class OrganizationRepository extends BaseRepository<Organization> {
 
 之前的注入的服务: 每个必须写个setter
 {% highlight java %}
+
 public abstract class BaseService<M extends Serializable> {  
     private BaseRepository<M> repository;  
     public void setRepository(BaseRepository<M> repository) {  
@@ -49,6 +49,7 @@ public abstract class BaseService<M extends Serializable> {
         repository.save(m);  
     }  
 }  
+
 @Service  
 public class UserService extends BaseService<User> {  
     @Autowired  
@@ -64,11 +65,10 @@ public class OrganizationService extends BaseService<Organization> {
         setRepository(organizationRepository);  
     }  
 }  
+
 {% endhighlight %}
 
-
-
-范型注入的服务
+## 范型注入的服务
 {% highlight java %}
 
 // 抽象服务类
