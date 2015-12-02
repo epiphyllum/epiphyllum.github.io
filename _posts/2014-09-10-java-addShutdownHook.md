@@ -7,7 +7,8 @@ tags: ["java", "addShutdownHook"]
 ---
 {% include JB/setup %}
 
-
+如果在我系统中main线程是唯一的前台线程，当前启动了一堆其他服务后， 没有其他事情可干， 
+这时候, 需要一个阻塞点。addShutdownHook + syncronized + wait/notify是个不错的手段
 
 {% highlight java %}
 
