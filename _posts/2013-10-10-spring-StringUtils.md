@@ -21,11 +21,11 @@ StringUtils.hasLength("Hello") = true
 
 是否有字符 
 {% highlight java %}
-   StringUtils.hasText(null) = false   // null, "", 以及" "都认为没有字符!!!
-   StringUtils.hasText("") = false
-   StringUtils.hasText(" ") = false
-   StringUtils.hasText("12345") = true
-   StringUtils.hasText(" 12345 ") = true
+StringUtils.hasText(null) = false   // null, "", 以及" "都认为没有字符!!!
+StringUtils.hasText("") = false
+StringUtils.hasText(" ") = false
+StringUtils.hasText("12345") = true
+StringUtils.hasText(" 12345 ") = true
 {% endhighlight %}
 
 是否包含空白字符
