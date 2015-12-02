@@ -14,5 +14,14 @@ description: ""
 ## scala资源
 [宏江](http://hongjing.info)  
 [有趣的scala shell](http://lihaoyi.github.io/Ammonite/#Ammonite-Shell)  
+[scala DI](https://speakerdeck.com/marakana/dead-simple-dependency-injection-in-scala)
+[introducing extractor](http://www.slideshare.net/fullscreen/ayushmishra2005/knolx-session-introducing-extractors-in-scala/1)
+[introducing functional object](http://www.slideshare.net/ruchijindal87/functional-object-14058420?ref=http://ruchijindal.wordpress.com/2012/08/24/functional-object/)
+[scala types of types](http://ktoso.github.io/scala-types-of-types/)
+[learning scalaz](http://eed3si9n.com/learning-scalaz/Combined+Pages.html)
+[Locks, Actor, And STM In Pictures](http://adit.io/posts/2013-05-15-Locks,-Actors,-And-STM-In-Pictures.html)
+[Practical Type Minning in Scala](http://www.slideshare.net/prasinous/scaladays-2013-final)
+[Introduction to Functional Patterns](http://jsuereth.com/intro-to-fp/print.html)
+[Scala Compiler Phases](https://wiki.scala-lang.org/display/SIW/Overview+of+Compiler+Phases)
 
 ## Tools && DevOps
