@@ -8,8 +8,6 @@ tags: ["java", "addShutdownHook"]
 {% include JB/setup %}
 
 
-{% highlight java %}
-
 我们经常会对字符串进行操作，spring已经实现了常用的处理功能。我们可以使用org.springframework.util.StringUtils 工具类帮我们处理字符串。
 工具类整理如下：
 
