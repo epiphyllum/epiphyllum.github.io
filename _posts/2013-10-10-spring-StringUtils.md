@@ -11,7 +11,7 @@ tags: ["java", "addShutdownHook"]
 我们经常会对字符串进行操作，spring已经实现了常用的处理功能。我们可以使用org.springframework.util.StringUtils 工具类帮我们处理字符串。
 工具类整理如下：
 
-是否有长度
+## 是否有长度
 {% highlight java %}
 StringUtils.hasLength(null) = false    // null是没有长度
 StringUtils.hasLength("") = false      // ""也是没有长度的
@@ -19,7 +19,7 @@ StringUtils.hasLength(" ") = true
 StringUtils.hasLength("Hello") = true
 {% endhighlight %}
 
-是否有字符 
+## 是否有字符 
 {% highlight java %}
 StringUtils.hasText(null) = false   // null, "", 以及" "都认为没有字符!!!
 StringUtils.hasText("") = false
@@ -28,7 +28,7 @@ StringUtils.hasText("12345") = true
 StringUtils.hasText(" 12345 ") = true
 {% endhighlight %}
 
-是否包含空白字符
+## 是否包含空白字符
 {% highlight java %}
 StringUtils.containsWhitespace(null)=false     // null 不含
 StringUtils.containsWhitespace("")=false       // ""也不含
@@ -67,7 +67,7 @@ StringUtils.trimLeadingWhitespace(" a b ")="a b "
 StringUtils.trimLeadingWhitespace(" a b  c ")="a b  c "
 {% endhighlight %}
 
-去除后的空白字符
+## 去除后的空白字符
 {% highlight java %}
 StringUtils.trimTrailingWhitespace(null)=null;
 StringUtils.trimTrailingWhitespace(" ")="";
@@ -79,7 +79,7 @@ StringUtils.trimTrailingWhitespace(" a b ")=" a b";
 StringUtils.trimTrailingWhitespace(" a b  c ")=" a b  c";
 {% endhighlight %}
 
-# 去除所有的空白字符
+## 去除所有的空白字符
 {% highlight java %}
 StringUtils.trimAllWhitespace("")="";
 StringUtils.trimAllWhitespace(" ")="";
@@ -91,7 +91,7 @@ StringUtils.trimAllWhitespace(" a b ")="ab";
 StringUtils.trimAllWhitespace(" a b  c "="abc";
 {% endhighlight %}
 
-统计一个子字符串在字符串出现的次数
+## 统计一个子字符串在字符串出现的次数
 {% highlight java %}
 StringUtils.countOccurrencesOf(null, null) == 0;
 StringUtils.countOccurrencesOf("s", null) == 0;
@@ -107,7 +107,7 @@ StringUtils.countOccurrencesOf("erowoiueoiur", "oiur") == 1;
 StringUtils.countOccurrencesOf("erowoiueoiur", "r") == 2;
 {% endhighlight %}
 
-字符串替换
+## 字符串替换
 {% highlight java %}
 String inString = "a6AazAaa77abaa";
 String oldPattern = "aa";
@@ -127,7 +127,7 @@ s = StringUtils.replace(inString, null, newPattern);
 s.equals(inString)=true
 {% endhighlight %}
 
-删除字符串
+## 删除字符串
 {% highlight java %}
 String inString = "The quick brown fox jumped over the lazy dog";
 String noThe = StringUtils.delete(inString, "the");
@@ -142,7 +142,7 @@ String mismatch = StringUtils.delete(inString, "dxxcxcxog");
 mismatch.equals(inString)=true;
 {% endhighlight %}
 
-删除任何字符
+## 删除任何字符
 {% highlight java %}
 String inString = "Able was I ere I saw Elba";
 
@@ -154,20 +154,20 @@ String mismatch = StringUtils.deleteAny(inString, "#@$#$^");
 mismatch.equals(inString)=true;
 {% endhighlight %}
 
-quote字符串
+## quote字符串
 {% highlight java %}
 assertEquals("'myString'", StringUtils.quote("myString"));
 assertEquals("''", StringUtils.quote(""));
 assertNull(StringUtils.quote(null));
 {% endhighlight %}
 
-首字母大小写
+## 首字母大小写
 {% highlight java %}
 StringUtils.capitalize(str)  
 StringUtils.uncapitalize(str)
 {% endhighlight %}
 
-获取字符串文件名和扩展名, 如:"mypath/myfile.txt" -> myfile.txt
+## 获取字符串文件名和扩展名, 如:"mypath/myfile.txt" -> myfile.txt
 {% highlight java %}
 StringUtils.getFilename("myfile").equals("myfile") = true;
 StringUtils.getFilename("mypath/myfile").equals("myfile") = true;
@@ -176,7 +176,7 @@ StringUtils.getFilename("myfile.txt").equals("myfile.txt") = true;
 StringUtils.getFilename("mypath/myfile.txt").equals("myfile.txt") = true;
 {% endhighlight %}
 
-获取字符串扩展名, 以.分隔
+## 获取字符串扩展名, 以.分隔
 {% highlight java %}
 StringUtils.getFilenameExtension("myfile") = null;
 StringUtils.getFilenameExtension("myPath/myfile") = null;
@@ -186,7 +186,7 @@ StringUtils.StringUtils.getFilenameExtension("myfile.txt").equals("txt") = true;
 StringUtils.getFilenameExtension("mypath/myfile.txt").equals("txt") = true;
 {% endhighlight %}
 
-舍去文件名扩展名
+## 舍去文件名扩展名
 {% highlight java %}
 StringUtils.stripFilenameExtension(null)=true;
 StringUtils.stripFilenameExtension("").equals("") = true;
