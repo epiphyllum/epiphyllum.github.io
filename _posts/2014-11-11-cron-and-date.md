@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "当cron遇到date命令"
-description: "cron中的date命令"
+title: "jackson date format"
+description: "jackson date format"
 category: "bash"
 tags: ["bash",  "cron",  "date"]
 ---

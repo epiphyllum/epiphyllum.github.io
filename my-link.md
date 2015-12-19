@@ -10,6 +10,8 @@ description: ""
 [artifacts坐标查找](http://www.mvnrepository.com/)  
 [mysql && spring-boot](http://duqicauc.github.io/Spring-Boot-with-Mysql/?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
 [深入浅出RxJava](http://blog.csdn.net/lzyzsd/article/details/41833541)
+[Spring JavaConfig](http://blog.csdn.net/liuya1985liuya/article/details/1693853)
+[JmsTempate问题](http://blog.csdn.net/czp11210/article/details/9153219)
 
 ## scala资源
 [宏江](http://hongjing.info)  
