@@ -19,6 +19,7 @@ description: ""
 [Vertx core](http://vertx.io/docs/vertx-core/java/)
 [java资源大全](https://github.com/jobbole/awesome-java-cn)
 [java generics](http://tutorials.jenkov.com/java-reflection/generics.html)
+[java generics](http://bbs.csdn.net/topics/380236926)
 
 ## scala资源
 [宏江](http://hongjing.info)  
