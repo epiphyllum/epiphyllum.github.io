@@ -13,6 +13,12 @@ description: ""
 [Spring JavaConfig](http://blog.csdn.net/liuya1985liuya/article/details/1693853)
 [JmsTempate问题](http://blog.csdn.net/czp11210/article/details/9153219)
 [Spring常用utils](http://www.cnblogs.com/younggun/p/3247262.html)
+[Introduction to Rx](http://www.introtorx.com/Content/v1.0.10621.0/00_Foreword.html)
+[RxJava](https://speakerdeck.com/benjchristensen/reactive-programming-with-rx-at-qconsf-2014)
+[RxJava资源](https://github.com/lzyzsd/Awesome-RxJava)
+[Vertx core](http://vertx.io/docs/vertx-core/java/)
+[java资源大全](https://github.com/jobbole/awesome-java-cn)
+[java generics](http://tutorials.jenkov.com/java-reflection/generics.html)
 
 ## scala资源
 [宏江](http://hongjing.info)  
