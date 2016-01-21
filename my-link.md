@@ -33,5 +33,8 @@ description: ""
 [Practical Type Minning in Scala](http://www.slideshare.net/prasinous/scaladays-2013-final)
 [Introduction to Functional Patterns](http://jsuereth.com/intro-to-fp/print.html)
 [Scala Compiler Phases](https://wiki.scala-lang.org/display/SIW/Overview+of+Compiler+Phases)
+[scalactic](http://www.scalactic.org/)
+[shapeless](http://www.slideshare.net/roeschinc/scala-bythebay)
+[type class in scala](http://www.slideshare.net/sukanthajra/scala-typeclasses?qid=a6f78e6f-259f-4f10-86f7-2c875fb3836d&v=default&b=&from_search=7)
 
 ## Tools && DevOps
