@@ -36,5 +36,6 @@ description: ""
 [scalactic](http://www.scalactic.org/)
 [shapeless](http://www.slideshare.net/roeschinc/scala-bythebay)
 [type class in scala](http://www.slideshare.net/sukanthajra/scala-typeclasses?qid=a6f78e6f-259f-4f10-86f7-2c875fb3836d&v=default&b=&from_search=7)
+[scala implicits](http://www.slideshare.net/DerekWyatt1/scala-implicits-not-to-be-feared?related=1)
 
 ## Tools && DevOps
