@@ -20,6 +20,7 @@ description: ""
 [java资源大全](https://github.com/jobbole/awesome-java-cn)  
 [java generics](http://tutorials.jenkov.com/java-reflection/generics.html)  
 [java generics](http://bbs.csdn.net/topics/380236926)  
+[best jvm deployment](http://www.slideshare.net/jkutner/12-factorsv3)
 
 ## scala资源
 [宏江](http://hongjing.info)    
@@ -37,5 +38,22 @@ description: ""
 [shapeless](http://www.slideshare.net/roeschinc/scala-bythebay)  
 [type class in scala](http://www.slideshare.net/sukanthajra/scala-typeclasses?qid=a6f78e6f-259f-4f10-86f7-2c875fb3836d&v=default&b=&from_search=7)  
 [scala implicits](http://www.slideshare.net/DerekWyatt1/scala-implicits-not-to-be-feared?related=1)  
+[modularity in scala](http://www.slideshare.net/DerekWyatt1/baking-delicious-modularity-in-scala)
+[building functional stream in scala](http://www.slideshare.net/DerekWyatt1/building-a-functional-stream-in-scala)
+[Akka in 100 slides](http://www.slideshare.net/DerekWyatt1/akka-in-100-slides-or-less)
+[Akka in production 2015](http://www.slideshare.net/EvanChan2/akka-in-production-scaladays-2015)
+[Akka in practice 2013](http://www.slideshare.net/NLJUG/akka-in-practice-age-mooij-and-raymond-roestenburg)
+[Akka-Streams](http://www.slideshare.net/StephaneManciot/psug-52-dataflow-and-simplified-reactive-programming-with-akkastreams)
+[building-reactive-applications-with-akka-in-scala](http://www.slideshare.net/jboner/building-reactive-applications-with-akka-in-scala)
+[event-sourced architecturs with akka](http://www.slideshare.net/SanderMak/eventsourced-architectures-with-akka)
+[akka persistence](http://www.slideshare.net/ktoso/akka-persistence-event-sourcing-in-30-minutes)
+[cqrs-1-2015](http://www.slideshare.net/chris.e.richardson/developing-eventdriven-microservices-with-event-sourcing-and-cqrs-svcc-svcc2015)
+[cqrs-2-2015](http://www.slideshare.net/chris.e.richardson/building-and-deploying-microservices-with-event-sourcing-cqrs-and-docker-qconsf-2014)
+[cqrs-3-2015](http://www.slideshare.net/chris.e.richardson/building-microservices-with-scala-functional-domain-models-and-spring-boot)
+[fun with scala reflection](http://www.michaelpollmeier.com/fun-with-scalas-new-reflection-api-2-10/)
+[create your custom scala repl](http://www.michaelpollmeier.com/create-your-custom-scala-repl/)
+[michaelpollmeier scala](http://www.michaelpollmeier.com/)
+[real-world-scala-DI](http://jonasboner.com/real-world-scala-dependency-injection-di/)
+[Scala-AOP](http://jonasboner.com/real-world-scala-managing-cross-cutting-concerns-using-mixin-composition-and-aop/)
 
 ## Tools && DevOps

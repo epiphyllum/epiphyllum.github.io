@@ -69,4 +69,6 @@ ssh -CfNg -R 5555:127.0.0.2:9494 zhouchao@127.0.1.1
 GET 'http://127.0.1.1:5555/'
 {% endhighlight %} 
 
+4. 注意, 需在ssh主机上/etc/ssh/sshd_config中增加GatewayPorts yes, 使得服务能暴露在公共IP上
+
 
