@@ -21,6 +21,7 @@ description: ""
 [java generics](http://tutorials.jenkov.com/java-reflection/generics.html)  
 [java generics](http://bbs.csdn.net/topics/380236926)  
 [best jvm deployment](http://www.slideshare.net/jkutner/12-factorsv3)
+[java性能测试-gatling](http://gatling.io/docs/2.1.7/quickstart.html)
 
 ## scala资源
 [宏江](http://hongjing.info)    
@@ -55,5 +56,8 @@ description: ""
 [michaelpollmeier scala](http://www.michaelpollmeier.com/)
 [real-world-scala-DI](http://jonasboner.com/real-world-scala-dependency-injection-di/)
 [Scala-AOP](http://jonasboner.com/real-world-scala-managing-cross-cutting-concerns-using-mixin-composition-and-aop/)
+[type-classes-pdf](http://ropas.snu.ac.kr/~bruno/papers/TypeClasses.pdf)
+[scala-dependent-type](http://wheaties.github.io/Presentations/Scala-Dep-Types/dependent-types.html#/1)
+[Neophytes guide to scala](http://danielwestheide.com/scala/neophytes.html)
 
 ## Tools && DevOps

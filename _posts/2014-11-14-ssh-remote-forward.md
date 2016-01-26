@@ -71,4 +71,6 @@ GET 'http://127.0.1.1:5555/'
 
 4. 注意, 需在ssh主机上/etc/ssh/sshd_config中增加GatewayPorts yes, 使得服务能暴露在公共IP上
 
+5. ssh隧道往往不稳定, 需要增加参数: -o TCPKeepAlive=yes
+
 
