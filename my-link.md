@@ -22,6 +22,7 @@ description: ""
 [java generics](http://bbs.csdn.net/topics/380236926)  
 [best jvm deployment](http://www.slideshare.net/jkutner/12-factorsv3)
 [java性能测试-gatling](http://gatling.io/docs/2.1.7/quickstart.html)
+[java测试-jmh](http://antoniogoncalves.org/2015/01/15/micro-benchmarking-with-jmh-measure-dont-guess/)
 
 ## scala资源
 [宏江](http://hongjing.info)    
@@ -51,7 +52,7 @@ description: ""
 [cqrs-1-2015](http://www.slideshare.net/chris.e.richardson/developing-eventdriven-microservices-with-event-sourcing-and-cqrs-svcc-svcc2015)  
 [cqrs-2-2015](http://www.slideshare.net/chris.e.richardson/building-and-deploying-microservices-with-event-sourcing-cqrs-and-docker-qconsf-2014)  
 [cqrs-3-2015](http://www.slideshare.net/chris.e.richardson/building-microservices-with-scala-functional-domain-models-and-spring-boot)  
-[fun with scala reflection](http://www.michaelpollmeier.com/fun-with-scalas-new-reflection-api-2-10/)  
+[fun-with-scala-reflection](http://www.michaelpollmeier.com/fun-with-scalas-new-reflection-api-2-10/)  
 [create your custom scala repl](http://www.michaelpollmeier.com/create-your-custom-scala-repl/)  
 [michaelpollmeier scala](http://www.michaelpollmeier.com/)  
 [real-world-scala-DI](http://jonasboner.com/real-world-scala-dependency-injection-di/)  
@@ -64,6 +65,8 @@ description: ""
 [mc-beath](http://jim-mcbeath.blogspot.jp/search/label/scala)  
 [michid](https://michid.wordpress.com/)  
 [jesper](http://jnordenberg.blogspot.jp/)  
-[Philosophy and functional programming](http://blog.higher-order.com/)  
+[Philosophy-and-functional-programming](http://blog.higher-order.com/)  
 
 ## Tools && DevOps
+
+
